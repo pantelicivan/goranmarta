@@ -189,9 +189,6 @@ const Admin = () => {
         <Card className="mb-6">
           <CardHeader>
             <CardTitle>Pretraga gostiju</CardTitle>
-            <CardDescription>
-              Pretražite po kontaktu ili imenu gosta
-            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="relative">

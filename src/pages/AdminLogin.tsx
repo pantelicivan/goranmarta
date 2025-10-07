@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
@@ -25,8 +31,8 @@ const AdminLogin = () => {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/admin`
-          }
+            emailRedirectTo: `${window.location.origin}/admin`,
+          },
         });
 
         if (error) throw error;
@@ -35,17 +41,16 @@ const AdminLogin = () => {
           title: "Registracija uspešna!",
           description: "Možete se prijaviti.",
         });
-        
+
         setIsSignUp(false);
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
-          password
+          password,
         });
 
         if (error) throw error;
 
-        // Check if user has admin role
         const { data: roleData } = await supabase
           .from("user_roles")
           .select("role")
@@ -68,7 +73,7 @@ const AdminLogin = () => {
       toast({
         title: "Greška",
         description: error.message || "Došlo je do greške",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -79,11 +84,11 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <Lock className="w-12 h-12 mx-auto mb-4" style={{ color: 'hsl(var(--wedding-rose))' }} />
-          <CardTitle className="text-2xl">Admin pristup</CardTitle>
-          <CardDescription>
-            {isSignUp ? "Registracija admin naloga" : "Prijavite se na admin panel"}
-          </CardDescription>
+          <Lock
+            className="w-12 h-12 mx-auto mb-4"
+            style={{ color: "hsl(var(--wedding-rose))" }}
+          />
+          <CardTitle className="text-2xl">Admin</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -113,25 +118,19 @@ const AdminLogin = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Molimo sačekajte..." : (isSignUp ? "Registruj se" : "Prijavi se")}
-            </Button>
-
-            <Button
-              type="button"
-              variant="ghost"
-              className="w-full"
-              onClick={() => setIsSignUp(!isSignUp)}
-            >
-              {isSignUp ? "Već imate nalog? Prijavite se" : "Nemate nalog? Registrujte se"}
+              {isLoading
+                ? "Molimo sačekajte..."
+                : isSignUp
+                ? "Registruj se"
+                : "Prijavi se"}
             </Button>
 
             <Button
               type="button"
               variant="link"
               className="w-full"
-              onClick={() => navigate("/")}
-            >
-              Nazad na pozivnicu
+              onClick={() => navigate("/")}>
+              Nazad na početnu
             </Button>
           </form>
         </CardContent>

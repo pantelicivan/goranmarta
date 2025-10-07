@@ -4,9 +4,8 @@ import RSVPForm from "@/components/RSVPForm";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto px-4 py-12 md:py-20">
-        {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="wedding-title mb-6">Marta & Goran</h1>
           <p className="wedding-subtitle mb-4">
@@ -23,15 +22,12 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Countdown */}
         <Countdown />
 
-        {/* RSVP Form */}
         <div className="mt-16">
           <RSVPForm />
         </div>
 
-        {/* Admin Link - Subtle at bottom */}
         <div className="text-center mt-20 opacity-30 hover:opacity-100 transition-opacity">
           <Link
             to="/admin/login"

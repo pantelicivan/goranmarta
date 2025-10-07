@@ -19,12 +19,10 @@ const RSVPForm = () => {
     const newGuestNames = [...guestNames];
 
     if (newCount > guestNames.length) {
-      // Add empty strings for new guests
       for (let i = guestNames.length; i < newCount; i++) {
         newGuestNames.push("");
       }
     } else {
-      // Remove excess names
       newGuestNames.splice(newCount);
     }
 
@@ -48,7 +46,6 @@ const RSVPForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
     if (!contactInfo.trim()) {
       toast({
         title: "Greška",
@@ -86,7 +83,6 @@ const RSVPForm = () => {
         } ${filledNames.length === 1 ? "osobu" : "osobe/osoba"}!`,
       });
 
-      // Reset form
       setContactInfo("");
       setGuestCount(1);
       setGuestNames([""]);
