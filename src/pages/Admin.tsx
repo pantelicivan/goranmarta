@@ -2,16 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { LogOut, Search, Users, Trash2 } from "lucide-react";
+import { LogOut, Search, Users, Trash2, Layout } from "lucide-react";
 
 interface RSVP {
   id: string;
@@ -27,6 +21,10 @@ const Admin = () => {
   const [filteredRsvps, setFilteredRsvps] = useState<RSVP[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const goToTables = () => {
+    navigate("/admin/tables");
+  };
 
   useEffect(() => {
     checkAuth();
@@ -152,10 +150,18 @@ const Admin = () => {
             </h1>
             <p className="wedding-subtitle"></p>
           </div>
-          <Button onClick={handleLogout} variant="outline">
-            <LogOut className="mr-2 h-4 w-4" />
-            Odjavi se
-          </Button>
+
+          <div className="flex space-x-2">
+            <Button onClick={goToTables} variant="outline">
+              <Layout className="mr-2 h-4 w-4" />
+              Raspored stolova
+            </Button>
+
+            <Button onClick={handleLogout} variant="outline">
+              <LogOut className="mr-2 h-4 w-4" />
+              Odjavi se
+            </Button>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4 mb-8">
